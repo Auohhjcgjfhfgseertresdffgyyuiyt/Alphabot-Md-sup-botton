@@ -18,7 +18,7 @@ global.APIs = {
 //buy apikey premium 0887435047326
 // Free apikey (silahkan login terus ganti V12 dgn apikey lu)
 global.APIKeys = {
-   'https://api.zeeoneofc.my.id': '36jLEpWh', // 👉 login https://api.zeeoneofc.my.id to get apikey
+   'https://api.zeeoneofc.my.id': 'V12', // 👉 login https://api.zeeoneofc.my.id to get apikey
 }
 global.sewabotnya = `
 edit sewabot di file settings.js line 24
@@ -66,7 +66,7 @@ global.region = "Indonesia" //bebas
 global.timezone = 'Asia/Makassar' //  timezone wib
 global.premium_fitur = ["ai", "openai", "chatgpt"] //tambahin aja sendiri, soalnya gk semua org mau fiturnya premium jadi gw buat kyk gini aja, biar bisa custom fitur mana aja yang bakal di jadiin premium
 global.badword_list = ["asu", "anjir"] //tambahin sendiri kata² nya, gunakan huruf kecil
-global.premium = ['6288215204772'] //premium user
+global.premium = ['62887435047326'] //premium user
 global.owner = ["6288215204772", "62887435047326"] //ganti agar fitur owner bisa di gunakan
 global.ownernomer = owner[0] + "@s.whatsapp.net"
 global.ownernomerr = "+"+ownernomer //tidak perlu di edit
@@ -82,7 +82,7 @@ global.push_kontak_delay = 5000 //5 detik, 1000 = 1 detik
 //type menu for menu
 global.typemenu = 'templateImage' //
 //type menu for downloadmenu, animemenu, etc
-global.typemenu2 = 'image' //
+global.typemenu2 = 'list' //
 global.multiplier = 69
 global.limitawal = {
    premium: "Infinity", //unlimited
@@ -315,4 +315,7 @@ global.mess = {
 let file = require.resolve(__filename)
 fs.watchFile(file, () => {
    fs.unwatchFile(file)
-   console.log(chalk.redBright(`Up
+   console.log(chalk.redBright(`Update'${__filename}'`))
+   delete require.cache[file]
+   require(file)
+})
