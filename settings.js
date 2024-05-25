@@ -54,7 +54,7 @@ global.language = indonesia //change indonesia to english if you don't understan
 
 // Other
 // Other
-global.pairingNumber = "6283160983468" //masukkan nomor yang ingin menjadi bot agar pairing code muncul pada saat install melalui panel
+global.pairingNumber = "6283879106234" //masukkan nomor yang ingin menjadi bot agar pairing code muncul pada saat install melalui panel
 global.botname = "Alphabot-Mdོ" //namabot kalian
 global.ownername = "ᴹᴿ᭄ ZeeoneOfcོ ×፝֟͜×" //nama kalian
 global.myweb = "https://s.id/zeeoneofc" //bebas asal jan hapus
