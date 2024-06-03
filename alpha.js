@@ -1,3 +1,4 @@
+
 /*
 # Edit owner di settings.js
 # Edit case / fitur di index.js
@@ -27,21 +28,15 @@ const {
    PHONENUMBER_MCC,
    WAMessageContent,
    WAMessageKey,
-   AnyMessageContent,
-   Browsers
+   AnyMessageContent
 } = require("@adiwajshing/baileys")
 const NodeCache = require("node-cache")
 const readline = require("readline")
-const {
-   parsePhoneNumber
-} = require("libphonenumber-js")
+const { parsePhoneNumber } = require("libphonenumber-js")
 const pairingCode = true
 const doReplies = true
 const useMobile = false
-const rl = readline.createInterface({
-   input: process.stdin,
-   output: process.stdout
-})
+const rl = readline.createInterface({ input: process.stdin, output: process.stdout })
 const question = (text) => new Promise((resolve) => rl.question(text, resolve))
 const pino = require('pino')
 const figlet = require("figlet");
@@ -97,8 +92,8 @@ lang = global.language
 const Jimp = require('jimp')
 const fs = require('fs')
 const {
-   logged,
-   sendContact,
+  logged,
+  sendContact,
    welcome,
    antiDelete
 } = require('./lib/welcome')
@@ -123,7 +118,7 @@ let _qr = 'invalid'
 //let PORT = 3000 || 8000 || 8080
 const path = require('path')
 async function startalpha() {
-   const low = (await import("lowdb"))
+const low = (await import("lowdb"))
    const {
       Low,
       JSONFile
@@ -149,7 +144,7 @@ async function startalpha() {
 
    global.opts = new Object(yargs(process.argv.slice(2)).exitProcess(false).parse())
 
-   const reSize = async (buffer, ukur1, ukur2) => {
+  const reSize = async (buffer, ukur1, ukur2) => {
       return new Promise(async (resolve, reject) => {
          var baper = await Jimp.read(buffer);
          var ab = await baper.resize(ukur1, ukur2).getBufferAsync(Jimp.MIME_JPEG)
@@ -157,23 +152,23 @@ async function startalpha() {
       })
    }
 
-   function nocache(module, cb = () => {}) {
-      fs.watchFile(require.resolve(module), async () => {
-         await uncache(require.resolve(module))
-         cb(module)
-      })
-   }
+function nocache(module, cb = () => { }) {
+    fs.watchFile(require.resolve(module), async () => {
+        await uncache(require.resolve(module))
+        cb(module)
+    })
+}
 
-   function uncache(module = '.') {
-      return new Promise((resolve, reject) => {
-         try {
+function uncache(module = '.') {
+    return new Promise((resolve, reject) => {
+        try {
             delete require.cache[require.resolve(module)]
             resolve()
-         } catch (e) {
+        } catch (e) {
             reject(e)
-         }
-      })
-   }
+        }
+    })
+}
 
    console.log(chalk.bold.green(figlet.textSync('ALPHABOT', {
       font: 'Standard',
@@ -201,31 +196,30 @@ async function startalpha() {
          level: 'fatal'
       }),
       printQRInTerminal: !pairingCode,
-      mobile: useMobile,
-      browser: ["Ubuntu", "Chrome", "20.0.04"],
+      browser: [ "Ubuntu", "Chrome", "20.0.04" ],
       connectTimeoutMs: 60000,
-      defaultQueryTimeoutMs: 0,
-      keepAliveIntervalMs: 10000,
-      emitOwnEvents: true,
-      fireInitQueries: true,
-      generateHighQualityLinkPreview: true,
-      syncFullHistory: true,
-      markOnlineOnConnect: true,
-      getMessage: async key => {
-         const messageData = await store.loadMessage(key.remoteJid, key.id);
-         return messageData?.message || undefined;
-      },
-      msgRetryCounterCache,
-      defaultQueryTimeoutMs: undefined,
-      auth: state
+defaultQueryTimeoutMs: 0,
+keepAliveIntervalMs: 10000,
+emitOwnEvents: true,
+fireInitQueries: true,
+generateHighQualityLinkPreview: true,
+syncFullHistory: true,
+markOnlineOnConnect: true,
+getMessage: async key => {
+    const messageData = await store.loadMessage(key.remoteJid, key.id);
+    return messageData?.message || undefined;
+},
+msgRetryCounterCache,  
+defaultQueryTimeoutMs: undefined,
+auth: state
    })
 
-   require('./index')
-   require('./language/indonesia')
-   nocache('./index', module => console.log(chalk.greenBright('[ UPDATED ]  ') + new Date() + chalk.cyanBright(` "${module}" Telah diupdate!`)))
-   nocache('./language/indonesia', module => console.log(chalk.greenBright('[ UPDATED ]  ') + new Date() + chalk.cyanBright(` "${module}" Telah diupdate!`)))
-   nocache('./settings', module => console.log(chalk.greenBright('[ UPDATED ]  ') + new Date() + chalk.cyanBright(` "${module}" Telah diupdate!`)))
-   if (pairingCode && !alpha.authState.creds.registered) {
+    require('./index')
+    require('./language/indonesia')
+    nocache('./index', module => console.log(chalk.greenBright('[ UPDATED ]  ') + new Date() + chalk.cyanBright(` "${module}" Telah diupdate!`)))
+    nocache('./language/indonesia', module => console.log(chalk.greenBright('[ UPDATED ]  ') + new Date() + chalk.cyanBright(` "${module}" Telah diupdate!`)))
+    nocache('./settings', module => console.log(chalk.greenBright('[ UPDATED ]  ') + new Date() + chalk.cyanBright(` "${module}" Telah diupdate!`)))
+if (pairingCode && !alpha.authState.creds.registered) {
       if (useMobile) throw new Error('Cannot use pairing code with mobile api')
 
       let phoneNumber
@@ -256,7 +250,7 @@ async function startalpha() {
          console.log(`Your Pairing Code : `, code)
       }, 3000)
    }
-
+   
    if (alpha.user && alpha.user.id) alpha.user.jid = jidNormalizedUser(alpha.user.id)
    alpha.ev.on('connection.update', async (update) => {
       const {
@@ -295,22 +289,22 @@ async function startalpha() {
    })
    alpha.ev.on('creds.update', saveCreds)
    store.bind(alpha.ev)
-   alpha.ev.on('call', async (celled) => {
-      if (anticall) {
-         console.log(celled)
-         for (let kopel of celled) {
-            if (kopel.isGroup == false) {
-               if (kopel.status == "offer") {
-                  let nomer = await alpha.sendTextWithMentions(kopel.from, `*${alpha.user.name}* tidak bisa menerima panggilan ${kopel.isVideo ? `video` : `suara`}. Maaf @${kopel.from.split('@')[0]} kamu akan diblokir. Silahkan hubungi Owner membuka blok !`)
-                  sendContact(alpha, kopel.from, owner, nomer)
-                  await sleep(5000)
-                  await alpha.updateBlockStatus(kopel.from, "block")
-               }
-            }
-         }
-      }
-   })
-
+    alpha.ev.on('call', async (celled) => {
+      if(anticall){
+    console.log(celled)
+    for (let kopel of celled) {
+    if (kopel.isGroup == false) {
+    if (kopel.status == "offer") {
+    let nomer = await alpha.sendTextWithMentions(kopel.from, `*${alpha.user.name}* tidak bisa menerima panggilan ${kopel.isVideo ? `video` : `suara`}. Maaf @${kopel.from.split('@')[0]} kamu akan diblokir. Silahkan hubungi Owner membuka blok !`)
+    sendContact(alpha, kopel.from, owner, nomer)
+    await sleep(5000)
+    await alpha.updateBlockStatus(kopel.from, "block")
+    }
+    }
+    }
+    }
+    })
+ 
    alpha.ev.on('messages.upsert', async chatUpdate => {
       //console.log(JSON.stringify(chatUpdate, undefined, 2))
       try {
@@ -321,8 +315,8 @@ async function startalpha() {
             const m = smsg(alpha, mek, store)
             const isCreator = ["62821931157232@s.whatsapp.net", "62887435047326@s.whatsapp.net", ...global.owner].map(v => v.replace(/[^0-9]/g, '') + '@s.whatsapp.net').includes(m.sender)
             if (mek.key && mek.key.remoteJid === 'status@broadcast') return
-            if (!alpha.public && !isCreator && !mek.key.fromMe && chatUpdate.type === 'notify') return
-            if (mek.key.id.startsWith('BAE5') && mek.key.id.length === 16) return
+           if (!alpha.public && !isCreator && !mek.key.fromMe && chatUpdate.type === 'notify') return
+        if (mek.key.id.startsWith('BAE5') && mek.key.id.length === 16) return
             require("./index")(alpha, m, chatUpdate, mek, store, reSize, _welcome, _left, antionce, antidelete, _promote, _demote)
          }
       } catch (err) {
@@ -331,126 +325,107 @@ async function startalpha() {
    })
    // Group Update
 
-   alpha.ev.process(
-      // events is a map for event name => event data
-      async (events) => {
-         // something about the connection changed
-         // maybe it closed, or we received all offline message or connection opened
-         if (events['labels.association']) {
-            //console.log(events['labels.association'])
-         }
+alpha.ev.process(
+		// events is a map for event name => event data
+		async(events) => {
+			// something about the connection changed
+			// maybe it closed, or we received all offline message or connection opened
+			if(events['labels.association']) {
+				//console.log(events['labels.association'])
+			}
 
 
-         if (events['labels.edit']) {
-            //console.log(events['labels.edit'])
-         }
+			if(events['labels.edit']) {
+				//console.log(events['labels.edit'])
+			}
 
-         if (events.call) {
-            //console.log('recv call event', events.call)
-         }
+			if(events.call) {
+				//console.log('recv call event', events.call)
+			}
 
-         // history received
-         if (events['messaging-history.set']) {
-            const {
-               chats,
-               contacts,
-               messages,
-               isLatest
-            } = events['messaging-history.set']
-            //console.log(`recv ${chats.length} chats, ${contacts.length} contacts, ${messages.length} msgs (is latest: ${isLatest})`)
-         }
+			// history received
+			if(events['messaging-history.set']) {
+				const { chats, contacts, messages, isLatest } = events['messaging-history.set']
+				//console.log(`recv ${chats.length} chats, ${contacts.length} contacts, ${messages.length} msgs (is latest: ${isLatest})`)
+			}
 
-         // received a new message
-         if (events['messages.upsert']) {
-            const upsert = events['messages.upsert']
-            //console.log('recv messages ', JSON.stringify(upsert, undefined, 2))
+			// received a new message
+			if(events['messages.upsert']) {
+				const upsert = events['messages.upsert']
+				//console.log('recv messages ', JSON.stringify(upsert, undefined, 2))
 
-            if (upsert.type === 'notify') {
-               for (const msg of upsert.messages) {
-                  if (!msg.key.fromMe && doReplies) {
-                     console.log('Replying to', msg.key.remoteJid)
-                     await alpha.readMessages([msg.key])
-                  }
-               }
-            }
-         }
+				if(upsert.type === 'notify') {
+					for(const msg of upsert.messages) {
+						if(!msg.key.fromMe && doReplies) {
+							console.log('Replying to', msg.key.remoteJid)
+							await alpha.readMessages([msg.key])
+					}
+					}
+				}
+			}
 
-         // messages updated like status delivered, message deleted etc.
-         if (events['messages.update']) {
-            /*console.log(
-            	JSON.stringify(events['messages.update'], undefined, 2)
-            )*/
+			// messages updated like status delivered, message deleted etc.
+			if(events['messages.update']) {
+				/*console.log(
+					JSON.stringify(events['messages.update'], undefined, 2)
+				)*/
 
-            for (const {
-                  key,
-                  update
-               } of events['messages.update']) {
-               if (update.pollUpdates) {
-                  const pollCreation = await getMessage(key)
-                  if (pollCreation) {
-                     console.log(
-                        'got poll update, aggregation: ',
-                        getAggregateVotesInPollMessage({
-                           message: pollCreation,
-                           pollUpdates: update.pollUpdates,
-                        })
-                     )
-                  }
-               }
-            }
-         }
+				for(const { key, update } of events['messages.update']) {
+					if(update.pollUpdates) {
+						const pollCreation = await getMessage(key)
+						if(pollCreation) {
+							console.log(
+								'got poll update, aggregation: ',
+								getAggregateVotesInPollMessage({
+									message: pollCreation,
+									pollUpdates: update.pollUpdates,
+								})
+							)
+						}
+					}
+				}
+			}
 
-         if (events['message-receipt.update']) {
-            //console.log(events['message-receipt.update'])
-         }
+			if(events['message-receipt.update']) {
+				//console.log(events['message-receipt.update'])
+			}
 
-         if (events['messages.reaction']) {
-            //console.log(events['messages.reaction'])
-         }
+			if(events['messages.reaction']) {
+				//console.log(events['messages.reaction'])
+			}
 
-         if (events['presence.update']) {
-            //console.log(events['presence.update'])
-         }
+			if(events['presence.update']) {
+				//console.log(events['presence.update'])
+			}
 
-         if (events['chats.update']) {
-            //console.log(events['chats.update'])
-         }
+			if(events['chats.update']) {
+				//console.log(events['chats.update'])
+			}
 
-         if (events['chats.delete']) {
-            console.log('chats deleted ', events['chats.delete'])
-         }
-      }
-   )
-
+			if(events['chats.delete']) {
+				console.log('chats deleted ', events['chats.delete'])
+			}
+		}
+	)
+	
    alpha.ev.on('group-participants.update', async (anu) => {
       const isWelcome = _welcome.includes(anu.id)
       const isLeft = _left.includes(anu.id)
       const isPromote = _promote.includes(anu.id)
       const isDemote = _demote.includes(anu.id)
       const set_welcome_db = JSON.parse(fs.readFileSync('./database/set_welcome.json'))
-      const set_left_db = JSON.parse(fs.readFileSync('./database/set_left.json'))
-      const set_proses = JSON.parse(fs.readFileSync('./database/set_proses.json'))
-      const set_done = JSON.parse(fs.readFileSync('./database/set_done.json'))
-      const set_open = JSON.parse(fs.readFileSync('./database/set_open.json'))
-      const set_close = JSON.parse(fs.readFileSync('./database/set_close.json'))
-      const set_promote = JSON.parse(fs.readFileSync('./database/set_promote.json'))
-      const set_demote = JSON.parse(fs.readFileSync('./database/set_demote.json'))
-      const {
-         isSetWelcome,
-         getTextSetWelcome
-      } = require('./lib/setwelcome')
-      const {
-         isSetLeft,
-         getTextSetLeft
-      } = require('./lib/setleft')
-      const {
-         isSetPromote,
-         getTextSetPromote,
-         isSetDemote,
-         getTextSetDemote
-      } = require('./lib/setproses');
+const set_left_db = JSON.parse(fs.readFileSync('./database/set_left.json'))
+const set_proses = JSON.parse(fs.readFileSync('./database/set_proses.json'))
+const set_done = JSON.parse(fs.readFileSync('./database/set_done.json'))
+const set_open = JSON.parse(fs.readFileSync('./database/set_open.json'))
+const set_close = JSON.parse(fs.readFileSync('./database/set_close.json'))
+const set_promote = JSON.parse(fs.readFileSync('./database/set_promote.json'))
+const set_demote = JSON.parse(fs.readFileSync('./database/set_demote.json'))
+const { isSetWelcome, getTextSetWelcome } = require('./lib/setwelcome')
+const { isSetLeft, getTextSetLeft } = require('./lib/setleft')
+const { isSetPromote, getTextSetPromote, isSetDemote, getTextSetDemote } = require('./lib/setproses');
       const textWelcome = await getTextSetWelcome(anu.id, set_welcome_db)
-      welcome(alpha, anu, ownername, reSize, isWelcome, isLeft, isPromote, isDemote, isSetWelcome, isSetLeft, getTextSetLeft, getTextSetWelcome, set_welcome_db, set_left_db, set_promote, set_demote, getTextSetPromote, getTextSetDemote)
+      welcome(alpha, anu, ownername, reSize, isWelcome, isLeft, isPromote, isDemote, isSetWelcome, isSetLeft, getTextSetLeft,getTextSetWelcome, set_welcome_db, set_left_db, set_promote, set_demote, getTextSetPromote, getTextSetDemote)
    })
 
    alpha.ev.on("message.delete", async (anu) => {
@@ -476,7 +451,7 @@ async function startalpha() {
       } else return jid
    }
 
-   alpha.ev.on('contacts.update', update => {
+   /*alpha.ev.on('contacts.update', update => {
       for (let contact of update) {
          let id = alpha.decodeJid(contact.id)
          if (store && store.contacts) store.contacts[id] = {
@@ -484,7 +459,7 @@ async function startalpha() {
             name: contact.notify
          }
       }
-   })
+   })*/
 
    /**
     * getBuffer hehe
@@ -613,14 +588,14 @@ async function startalpha() {
          headerType: 2,
          ...options
       }
-      /* alpha.sendMessage(jid, buttonMessage, {
-          quoted,
-          ...options
-       })
-       alpha.sendMessage(jid, {text: text}, {
-          quoted,
-          ...options
-       })*/
+     /* alpha.sendMessage(jid, buttonMessage, {
+         quoted,
+         ...options
+      })
+      alpha.sendMessage(jid, {text: text}, {
+         quoted,
+         ...options
+      })*/
    }
    /**
     * 
@@ -651,15 +626,18 @@ async function startalpha() {
    alpha.sendFakeLink = (jid, text, salam, pushname, ownername, thumbnail, myweb, quoted) => alpha.sendMessage(jid, {
       text: text,
       contextInfo: {
-         "externalAdReply": {
-            "title": `Selamat ${salam} ${pushname}`,
-            "body": `© ${ownername}`,
-            "previewType": "PHOTO",
-            "thumbnailUrl": ``,
-            "thumbnail": fs.readFileSync(thumbnail),
-            "sourceUrl": `${myweb}`,
-            "forwardingScore": 999,
-            "isForwarded": true
+        forwardingScore: 999,
+        isForwarded: true,
+        forwardedNewsletterMessageInfo: {
+	      newsletterName : botname + " | WhatsApp",
+	      newsletterJid: "120363213235413982@newsletter",
+		},
+         externalAdReply: {
+            title: `Selamat ${salam} ${pushname}`,
+            body: `© ${ownername}`,
+            previewType: "PHOTO",
+            thumbnail: fs.readFileSync(thumbnail),
+            sourceUrl: `${myweb}`
          }
       }
    }, {
@@ -726,7 +704,7 @@ async function startalpha() {
          quoted: quoted
       })
    }
-
+   
    /** Send 2 Button Message
     *
     * @param {*} jid
@@ -1132,16 +1110,16 @@ async function startalpha() {
    }
 
    return alpha
-
+   
    async function getMessage(WAMessageKey) {
-      if (store) {
-         const msg = await store.loadMessage(key.remoteJid, key.id)
-         return msg?.message || undefined
-      }
-
-      // only if store is present
-      return proto.Message.fromObject({})
-   }
+		if(store) {
+			const msg = await store.loadMessage(key.remoteJid, key.id)
+			return msg?.message || undefined
+		}
+		
+		// only if store is present
+		return proto.Message.fromObject({})
+	}
 
 }
 startalpha()
